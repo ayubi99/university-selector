@@ -8,9 +8,9 @@ const Logo = ({ size = "medium", className = "" }) => {
   };
 
   return (
-    <div className={`flex items-center ${className}`}>
+    <div className={`flex items-center  ${className}`}>
       <div
-        className={`${sizes[size]} bg-blue-700 rounded-xl flex items-center justify-center text-white font-bold shadow-lg`}
+        className={`${sizes[size]} bg-blue-700 rounded-xl flex items-center justify-center   text-center text-white font-bold shadow-lg`}
       >
         US
       </div>

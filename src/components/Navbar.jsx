@@ -13,11 +13,11 @@ const Navbar = ({ onOpenAuth }) => {
   ];
 
   return (
-    <nav className="sticky top-0 bg-blue-800 backdrop-blur-md z-50  text-white">
+    <nav className="sticky h-17 top-0 bg-blue-800 backdrop-blur-md z-50  text-white">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center">
+          <div className="flex items-center justify-between">
             <Logo size="medium" />
           </div>
 
