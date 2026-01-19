@@ -2,7 +2,7 @@ import React from "react";
 
 const Hero = ({ onOpenAuth }) => {
   return (
-    <section className="py-16 px-4 bg-blue-300">
+    <section className="py-16 px-4 text-black">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center">
           <h1 className="text-5xl md:text-6xl font-bold text-dark mb-6 leading-tight">

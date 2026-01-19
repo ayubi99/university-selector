@@ -27,22 +27,24 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen color-black bg-blue-300">
-      <Navbar onOpenAuth={handleOpenAuth} />
-
-      <Hero onOpenAuth={handleOpenAuth} />
-
-      <UniversityList />
-
-      <Features />
-
-      <Footer onOpenAuth={handleOpenAuth} />
-
-      <AuthModal
-        isOpen={authModal.isOpen}
-        type={authModal.type}
-        onClose={handleCloseAuth}
+    <div className="min-h-screen color-black  relative">
+      <div
+        className="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/home.jpg')" }}
       />
+      <div className="fixed inset-0 -z-10 bg-black/50"></div>
+      <div className="relative z-10">
+        <Navbar onOpenAuth={handleOpenAuth} />
+        <Hero onOpenAuth={handleOpenAuth} />
+        <UniversityList />
+        <Features />
+        <Footer onOpenAuth={handleOpenAuth} />
+        <AuthModal
+          isOpen={authModal.isOpen}
+          type={authModal.type}
+          onClose={handleCloseAuth}
+        />
+      </div>
     </div>
   );
 }

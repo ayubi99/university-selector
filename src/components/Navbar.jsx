@@ -5,16 +5,15 @@ const Navbar = ({ onOpenAuth }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { name: "Universities", href: "#universities" },
-    { name: "Programs", href: "#programs" },
-    { name: "Scholarships", href: "#scholarships" },
-    { name: "Admissions", href: "#admissions" },
-    { name: "Compare", href: "#compare" },
-    { name: "Rankings", href: "#rankings" },
+    { name: "HOME", href: "#home" },
+    { name: "UNIVERSITIES", href: "#universites" },
+    { name: "RANKINGS", href: "#rankings" },
+    { name: "ABOUT", href: "#about" },
+    { name: "CONTACT", href: "#contact" },
   ];
 
   return (
-    <nav className="sticky top-0 bg-blue-400 backdrop-blur-md shadow-sm z-50 border-b">
+    <nav className="sticky top-0 bg-blue-800 backdrop-blur-md z-50  text-white">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -36,16 +35,10 @@ const Navbar = ({ onOpenAuth }) => {
 
             <div className="flex items-center space-x-4 ml-6">
               <button
-                onClick={() => onOpenAuth("login")}
-                className="text-dark hover:text-primary font-medium px-4 py-2 rounded-lg hover:bg-gray-50 transition"
-              >
-                Log in
-              </button>
-              <button
                 onClick={() => onOpenAuth("signup")}
-                className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark font-medium shadow-sm hover:shadow transition"
+                className="bg-blue-700 flex text-white px-6 py-2 rounded-lg hover:bg-primary-dark font-medium shadow-sm hover:shadow transition"
               >
-                1. Sign up
+                LOGIN
               </button>
             </div>
           </div>
@@ -80,21 +73,12 @@ const Navbar = ({ onOpenAuth }) => {
               <div className="pt-4 space-y-3">
                 <button
                   onClick={() => {
-                    onOpenAuth("login");
-                    setIsMenuOpen(false);
-                  }}
-                  className="w-full text-dark py-3 border rounded-lg hover:bg-gray-50"
-                >
-                  Log in
-                </button>
-                <button
-                  onClick={() => {
                     onOpenAuth("signup");
                     setIsMenuOpen(false);
                   }}
                   className="w-full bg-primary text-white py-3 rounded-lg font-medium"
                 >
-                  1. Sign up
+                  1. LOGIN
                 </button>
               </div>
             </div>
