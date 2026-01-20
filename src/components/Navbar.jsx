@@ -1,92 +1,41 @@
-import React, { useState } from "react";
-import Logo from "./Logo";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
-const Navbar = ({ onOpenAuth }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const navItems = [
-    { name: "HOME", href: "#home" },
-    { name: "UNIVERSITIES", href: "#universites" },
-    { name: "RANKINGS", href: "#rankings" },
-    { name: "ABOUT", href: "#about" },
-    { name: "CONTACT", href: "#contact" },
-  ];
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
 
   return (
-    <nav className="sticky h-17 top-0 bg-blue-800 backdrop-blur-md z-50  text-white">
-      <div className="container mx-auto px-4 py-3">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center justify-between">
-            <Logo size="medium" />
-          </div>
+    <nav className="bg-slate-900 text-white px-6 py-4">
+      <div className="flex justify-between items-center">
+        {/* Logo */}
+        <h1 className="text-2xl font-bold">UniGuide</h1>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-dark hover:text-primary transition-colors font-medium"
-              >
-                {item.name}
-              </a>
-            ))}
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex space-x-6">
+          <li><Link to="/" className="hover:text-blue-400">Home</Link></li>
+          <li><Link to="/universities" className="hover:text-blue-400">Universities</Link></li>
+          <li><Link to="/about" className="hover:text-blue-400">About</Link></li>
+          <li><Link to="/contact" className="hover:text-blue-400">Contact</Link></li>
+        </ul>
 
-            <div className="flex items-center space-x-4 ml-6">
-              <button
-                onClick={() => onOpenAuth("signup")}
-                className="bg-blue-700 flex text-white px-6 py-2 rounded-lg hover:bg-primary-dark font-medium shadow-sm hover:shadow transition"
-              >
-                LOGIN
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden text-dark"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? (
-              <span className="text-2xl">✕</span>
-            ) : (
-              <span className="text-2xl">☰</span>
-            )}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="lg:hidden mt-4 py-4 border-t">
-            <div className="flex flex-col space-y-3">
-              {navItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-dark py-2 px-2 hover:text-primary transition"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </a>
-              ))}
-              <div className="pt-4 space-y-3">
-                <button
-                  onClick={() => {
-                    onOpenAuth("signup");
-                    setIsMenuOpen(false);
-                  }}
-                  className="w-full bg-primary text-white py-3 rounded-lg font-medium"
-                >
-                  1. LOGIN
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+        {/* Mobile Button */}
+        <button
+          className="md:hidden text-2xl"
+          onClick={() => setOpen(!open)}
+        >
+          ☰
+        </button>
       </div>
+
+      {/* Mobile Menu */}
+      {open && (
+        <ul className="md:hidden mt-4 space-y-3">
+          <li><Link to="/" onClick={() => setOpen(false)}>Home</Link></li>
+          <li><Link to="/universities" onClick={() => setOpen(false)}>Universities</Link></li>
+          <li><Link to="/about" onClick={() => setOpen(false)}>About</Link></li>
+          <li><Link to="/contact" onClick={() => setOpen(false)}>Contact</Link></li>
+        </ul>
+      )}
     </nav>
   );
-};
-
-export default Navbar;
+}
