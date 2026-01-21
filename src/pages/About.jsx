@@ -1,6 +1,7 @@
 export default function About() {
   return (
-    <div className="max-w-6xl mx-auto px-6 py-20">
+    <section id="about">
+      <div className="max-w-6xl mx-auto px-6 py-20">
       <h1 className="text-4xl font-bold text-center mb-6 text-slate-900">
         About UniGuide
       </h1>
@@ -36,5 +37,6 @@ export default function About() {
         </div>
       </div>
     </div>
+    </section>
   );
 }

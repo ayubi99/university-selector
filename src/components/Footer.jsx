@@ -1,22 +1,22 @@
 export default function Footer() {
   return (
-    <footer className="bg-slate-900 text-white py-10 mt-20">
-      <div className="max-w-6xl mx-auto px-6 text-center">
-        <h2 className="text-2xl font-bold mb-4">UniGuide</h2>
-        <p className="text-gray-400 mb-6">
-          Helping students explore universities and compare programs in KPK.
-        </p>
-
-        <div className="flex justify-center space-x-6 mb-4">
-          <a href="#" className="hover:text-blue-400">Home</a>
-          <a href="#" className="hover:text-blue-400">Universities</a>
-          <a href="#" className="hover:text-blue-400">About</a>
-          <a href="#" className="hover:text-blue-400">Contact</a>
+    <footer className="bg-slate-900 border-t bottom-0 top-0 border-slate-800">
+      <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+        
+        {/* Brand */}
+        <div className="text-sm font-semibold text-white tracking-wide">
+          UniSelection
         </div>
 
-        <p className="text-gray-500 text-sm">
-          &copy; {new Date().getFullYear()} UniGuide. All rights reserved.
+        {/* Description */}
+        <p className="text-xs text-gray-400 text-center max-w-md">
+          A centralized university information platform for Khyber Pakhtunkhwa
         </p>
+
+        {/* Copyright */}
+        <div className="text-xs text-gray-500">
+          © {new Date().getFullYear()} UniGuide. All rights reserved.
+        </div>
       </div>
     </footer>
   );

@@ -1,24 +1,56 @@
+import { Link } from "react-router-dom";
+import Universities from "./Universities";
+import About from "./About";
+import Contact from "./Contact";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
+
 export default function Home() {
+   const location = useLocation();
+
+  useEffect(() => {
+    const scrollToId = location.state?.scrollTo;
+    if (scrollToId) {
+      const section = document.getElementById(scrollToId);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
   return (
-    <div>
+    
+     
+<>
+<section id="home">
+   <div>
       {/* HERO SECTION */}
       <section className="bg-gradient-to-r from-slate-900 to-slate-700 text-white">
-        <div className="max-w-6xl mx-auto px-6 py-24 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold mb-6">
-            Your Guide to Universities in KPK
+        <div className="max-w-6xl mx-auto px-6 py-15 text-center">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
+            A Smart Platform for Exploring Universities in KPK
           </h1>
 
-          <p className="text-gray-300 max-w-2xl mx-auto mb-10">
-           UniGuide enables students to explore universities and compare programs, fees, and admission details through a single, centralized platform.
+          <p className="text-gray-300 max-w-2xl mx-auto mb-8">
+            UniSelection helps students explore universities and compare
+            programs, fees, and admission details — all in one centralized
+            platform.
           </p>
 
-          {/* Search */}
-          <div className="flex justify-center">
+          {/* Search + Get Started */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <input
               type="text"
               placeholder="Search university or program..."
-              className="w-full max-w-xl px-5 py-4 bg-slate-700 rounded-lg text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full sm:w-96 px-4 py-3 bg-slate-700 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+
+            <Link
+              to="/universities"
+              className="bg-slate-700 hover:bg-slate-800 text-white px-6 py-3 rounded-lg font-semibold transition"
+            >
+              Get Started
+            </Link>
           </div>
         </div>
       </section>
@@ -32,7 +64,7 @@ export default function Home() {
             </h3>
             <p className="text-gray-600">
               Compare universities and programs based on fees, eligibility,
-              and admission deadlines.
+              and admission criteria.
             </p>
           </div>
 
@@ -41,8 +73,8 @@ export default function Home() {
               ⏱ Updated Information
             </h3>
             <p className="text-gray-600">
-              Get up-to-date admission and program details collected
-              automatically.
+              Access regularly updated admission schedules and academic
+              details.
             </p>
           </div>
 
@@ -51,35 +83,49 @@ export default function Home() {
               🔍 Smart Search
             </h3>
             <p className="text-gray-600">
-              Easily search universities and programs to find the best match
-              for your future.
+              Quickly find universities and programs that match your academic
+              goals.
             </p>
           </div>
         </div>
       </section>
 
       {/* POPULAR UNIVERSITIES */}
-      <section className="py-20">
+      <section className="py-16">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-3xl font-bold text-center mb-12">
-            Popular Universities in KPK
+            Popular Universities in Khyber Pakhtunkhwa
           </h2>
 
-          <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
-            {["University of Peshawar", "AWKUM", "Gomal University"].map(
-              (uni, index) => (
-                <div
-                  key={index}
-                  className="border rounded-lg p-6 hover:shadow-lg transition"
-                >
-                  <h3 className="font-semibold text-lg">{uni}</h3>
-                  <p className="text-gray-500">View programs & details</p>
-                </div>
-              )
-            )}
+          <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 text-center">
+            {[
+              "University of Peshawar",
+              "UET Peshawar",
+              "Agriculture University Peshawar",
+            ].map((uni, index) => (
+              <div
+                key={index}
+                className="border rounded-xl p-6 hover:shadow-lg transition"
+              >
+                <h3 className="font-semibold text-lg mb-2">{uni}</h3>
+                <p className="text-gray-500 text-sm">
+                  View programs, fees & admission details
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
+    
     </div>
+</section>
+<Universities/>
+<About/>
+<Contact/>
+</>
+    
+    
+    
+   
   );
 }

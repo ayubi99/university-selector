@@ -6,10 +6,17 @@ export default function Universities() {
   // Dummy data
   const [universities] = useState([
     { id: 1, name: "University of Peshawar", city: "Peshawar" },
-    { id: 2, name: "Abdul Wali Khan University", city: "Mardan" },
-    { id: 3, name: "Gomal University", city: "D.I Khan" },
-    { id: 4, name: "Khyber Medical University", city: "Peshawar" },
-    { id: 5, name: "Bacha Khan University", city: "Charsadda" },
+    { id: 2, name: "Agriculture University Peshawar" , city: "Peshawar" },
+    { id: 3, name: "Islamia College University Peshawar", city: "Peshawar" },
+    { id: 4, name: "UET Peshawr", city: "Peshawar" },
+    { id: 5, name: "IM Science University Peshawr", city: "Peshawr" },
+    { id: 6, name: "City University Peshawr", city: "Peshawr" },
+    { id: 7, name: "CECOS University Of IT and Emerging Science Peshawr", city: "Peshawr" },
+    { id: 8, name: "Iqra National University Peshawr", city: "Peshawr" },
+    { id: 9, name: "Sarhad University Peshawr", city: "Peshawr" },
+    { id: 10,name: "Khyber Medical University Peshawr", city: "Peshawr" },
+    { id: 11,name: "Abasyn University Peshawr", city: "Peshawr" },
+    { id: 12,name: "Qurtuba University Of Science and Information Technology Peshawr", city: "Peshawr" },
   ]);
 
   const [search, setSearch] = useState("");
@@ -20,17 +27,19 @@ export default function Universities() {
   );
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-20">
+   
+     <section id="universities">
+       <div className="max-w-6xl mx-auto px-6 py-20">
       <h1 className="text-4xl font-bold text-slate-900 mb-6 text-center">
-        Universities in KPK
+        Universities 
       </h1>
 
       {/* Reusable SearchBar */}
-      <SearchBar
+      {/* <SearchBar
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Search universities..."
-      />
+      /> */}
 
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
         {filteredUniversities.map((uni) => (
@@ -43,5 +52,7 @@ export default function Universities() {
         ))}
       </div>
     </div>
+     </section>
+    
   );
 }

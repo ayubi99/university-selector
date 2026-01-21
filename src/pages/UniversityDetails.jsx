@@ -1,49 +1,89 @@
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import ProgramTable from "../components/ProgramTable";
-
-// Dummy data for now
-const dummyPrograms = {
-  1: [
-    { name: "BS Computer Science", fee: "PKR 60,000/year", deadline: "30 Sep 2026" },
-    { name: "BS Physics", fee: "PKR 50,000/year", deadline: "30 Sep 2026" },
-  ],
-  2: [
-    { name: "BS Mathematics", fee: "PKR 55,000/year", deadline: "25 Sep 2026" },
-    { name: "BS Chemistry", fee: "PKR 52,000/year", deadline: "25 Sep 2026" },
-  ],
-  3: [
-    { name: "MBBS", fee: "PKR 150,000/year", deadline: "10 Sep 2026" },
-    { name: "BDS", fee: "PKR 140,000/year", deadline: "10 Sep 2026" },
-  ],
-};
+import { useParams, useNavigate } from "react-router-dom";
 
 export default function UniversityDetails() {
-  const { id } = useParams(); // get id from URL
-  const [programs, setPrograms] = useState([]);
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    setPrograms(dummyPrograms[id] || []);
-  }, [id]);
+  const universities = [
+    {
+      id: 1,
+      name: "University of Peshawar",
+      city: "Peshawar",
+      description: "One of the oldest universities in KPK with programs in science, arts, and humanities.",
+      established: "1950",
+      students: "20,000",
+      website: "https://www.uop.edu.pk",
+    },
+    {
+      id: 2,
+      name: "Agriculture University Peshawar",
+      city: "Peshawar",
+      description: "Specialized in agricultural studies and research.",
+      established: "1981",
+      students: "7,000",
+      website: "https://aup.edu.pk",
+    },
+    {
+      id: 3,
+      name: "Islamia College University Peshawar",
+      city: "Peshawar",
+      description: "Known for humanities, sciences, and vibrant campus life.",
+      established: "1913",
+      students: "10,000",
+      website: "https://www.icup.edu.pk",
+    },
+    {
+      id: 4,
+      name: "UET Peshawar",
+      city: "Peshawar",
+      description: "Famous for engineering programs and technology research.",
+      established: "1980",
+      students: "8,500",
+      website: "https://www.uetpeshawar.edu.pk",
+    },
+    // Add more dummy data if needed
+  ];
 
-  // Map id to university name
-  const universityNames = {
-    1: "University of Peshawar",
-    2: "Abdul Wali Khan University",
-    3: "Gomal University",
-  };
-  const uniName = universityNames[id] || "University Details";
+  const university = universities.find((uni) => uni.id === parseInt(id));
+
+  if (!university) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[70vh] px-6">
+        <h2 className="text-3xl font-bold mb-4 text-red-500">University Not Found</h2>
+        <p className="text-slate-700">The university you are looking for does not exist.</p>
+        <button
+          className="mt-6 text-blue-600 hover:underline"
+          onClick={() => navigate("/universities")}
+        >
+          ← Back to Home
+        </button>
+      </div>
+    );
+  }
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-20">
-      {/* Header */}
-      <h1 className="text-4xl font-bold mb-4 text-slate-900">{uniName}</h1>
-      <p className="text-gray-600 mb-10">
-        Explore available programs, fee structure, and admission deadlines below.
-      </p>
+    <div className="max-w-4xl mx-auto px-6 py-20">
+      <h1 className="text-4xl font-bold text-slate-900 mb-4">{university.name}</h1>
+      <p className="text-lg text-slate-700 mb-2">📍 {university.city}</p>
+      <p className="text-slate-700 mb-4">{university.description}</p>
 
-      {/* Reusable ProgramTable */}
-      <ProgramTable programs={programs} />
+      <div className="mb-6">
+        <p><strong>Established:</strong> {university.established}</p>
+        <p><strong>Students:</strong> {university.students}</p>
+        <p>
+          <strong>Website:</strong>{" "}
+          <a href={university.website} target="_blank" className="text-blue-600 hover:underline">
+            {university.website}
+          </a>
+        </p>
+      </div>
+
+      <button
+        className="mt-6 text-blue-600 hover:underline"
+        onClick={() => navigate("/")}
+      >
+        ← Back to Home
+      </button>
     </div>
   );
 }
