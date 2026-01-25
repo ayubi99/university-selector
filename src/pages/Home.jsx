@@ -37,7 +37,7 @@ export default function Home() {
       <section id="home">
         <div>
           {/* HERO SECTION */}
-          <section className="bg-gradient-to-r from-slate-900 to-slate-700 text-white">
+          <section className="bg-gradient-to-r from-slate-800 to-slate-700 text-white">
             <div className="max-w-6xl mx-auto px-6 py-15 text-center">
               {/* Animated H1 with typing effect */}
               <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight min-h-[4rem] md:min-h-[5rem]">
