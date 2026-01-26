@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import {
   FaHome,
   FaUniversity,
@@ -7,6 +7,7 @@ import {
   FaEnvelope,
   FaBars,
   FaTimes,
+  FaUser,
 } from "react-icons/fa";
 
 export default function Navbar() {
@@ -116,8 +117,8 @@ export default function Navbar() {
             </div>
 
             {/* Desktop Navigation with Icons */}
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-center space-x-4 lg:space-x-8">
+            <div className="hidden md:flex items-center">
+              <div className="flex items-center space-x-4 lg:space-x-8 mr-8">
                 {navItems.map((item) => (
                   <button
                     key={item.id}
@@ -130,6 +131,16 @@ export default function Navbar() {
                   </button>
                 ))}
               </div>
+
+              {/* Login Button that links to login page */}
+              <Link
+                to="/login"
+                className="flex items-center text-sm lg:text-base font-medium hover:text-blue-400 px-3 py-2"
+                aria-label="Go to Login page"
+              >
+                <FaUser className="mr-2" />
+                Login
+              </Link>
             </div>
 
             {/* Mobile menu button with React Icon */}
@@ -157,7 +168,7 @@ export default function Navbar() {
 
       {/* Full-screen mobile menu overlay */}
       {open && (
-        <div className="md:hidden fixed inset-0 z-40">
+        <div className="md:hidden fixed inset-0 overflow-auto z-40">
           {/* Semi-transparent backdrop */}
           <div
             className="absolute inset-0 bg-black bg-opacity-80"
@@ -171,6 +182,7 @@ export default function Navbar() {
             className="absolute inset-x-0 top-16 bg-slate-800"
           >
             <div className="px-4 pt-4 pb-4 space-y-1">
+              {/* Navigation Items */}
               {navItems.map((item) => (
                 <button
                   key={item.id}
@@ -183,12 +195,26 @@ export default function Navbar() {
                 </button>
               ))}
 
+              {/* Mobile Login Button */}
+              <Link
+                to="/login"
+                className="w-full flex items-center text-left px-4 py-3 text-base font-medium text-white hover:text-blue-400"
+                aria-label="Go to Login page"
+                onClick={() => setOpen(false)}
+              >
+                <FaUser className="mr-3" />
+                Login
+              </Link>
+
               {/* Mobile-only content */}
-              <div className="pt-8 border-t border-slate-600 mt-8">
+              <div className="border-t border-gray-700 my-4"></div>
+              <div className="pt-8 mt-8">
                 <div className="px-4">
-                  <p className="text-base text-center text-gray-300 mb-6">
-                    Explore universities in KPK with our smart platform
-                  </p>
+                  <div className="flex items-center justify-center mb-4">
+                    <p className="text-base text-center text-gray-300">
+                      Explore universities in KPK with our smart Platform
+                    </p>
+                  </div>
                   <div className="h-20 w-20 mx-auto rounded-full bg-white overflow-hidden">
                     <img
                       src="/logoimage1.jpg"
@@ -196,7 +222,7 @@ export default function Navbar() {
                       className="h-full w-full object-cover"
                     />
                   </div>
-                  <p className="text-center text-gray-400 text-xs mt-6">
+                  <p className="text-center text-gray-400 text-xs mt-2">
                     UniSelection © 2026
                   </p>
                 </div>
