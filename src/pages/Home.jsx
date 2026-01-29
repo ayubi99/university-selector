@@ -47,7 +47,10 @@ export default function Home() {
   return (
     <>
       {/* HERO SECTION */}
-      <section className="bg-gradient-to-r from-slate-800 to-slate-700 text-white relative overflow-hidden">
+      <section
+        id="home"
+        className="bg-gradient-to-r from-slate-800 to-slate-700 text-white relative overflow-hidden"
+      >
         <div className="max-w-6xl mx-auto px-6 py-24 text-center">
           {/* Heading */}
           <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight min-h-[4rem] md:min-h-[6rem]">
