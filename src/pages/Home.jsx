@@ -1,16 +1,25 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import {
+  FaUniversity,
+  FaGraduationCap,
+  FaUsers,
+  FaClock,
+} from "react-icons/fa";
 import Universities from "./Universities";
 import About from "./About";
 import Contact from "./Contact";
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 
 export default function Home() {
   const location = useLocation();
+
   const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTypingComplete, setIsTypingComplete] = useState(false);
+
   const fullText = "A Smart Platform for Exploring Universities in KPK";
 
+  // Scroll to section if coming from navbar
   useEffect(() => {
     const scrollToId = location.state?.scrollTo;
     if (scrollToId) {
@@ -21,115 +30,102 @@ export default function Home() {
     }
   }, [location]);
 
+  // Typing effect
   useEffect(() => {
     if (currentIndex < fullText.length) {
       const timeout = setTimeout(() => {
         setDisplayText((prev) => prev + fullText[currentIndex]);
         setCurrentIndex((prev) => prev + 1);
-      }, 50); // Adjust speed here (milliseconds per character)
+      }, 50);
 
       return () => clearTimeout(timeout);
+    } else {
+      setIsTypingComplete(true); // typing finished
     }
-  }, [currentIndex, fullText]);
+  }, [currentIndex]);
 
   return (
     <>
-      <section id="home">
-        <div>
-          {/* HERO SECTION */}
-          <section className="bg-gradient-to-r from-slate-800 to-slate-700 text-white">
-            <div className="max-w-6xl mx-auto px-6 py-15 text-center">
-              {/* Animated H1 with typing effect */}
-              <h1 className="text-3xl md:text-4xl font-bold mb-4 leading-tight min-h-[4rem] md:min-h-[5rem]">
-                {displayText}
-                <span className="animate-pulse inline-block ml-1">|</span>
-              </h1>
+      {/* HERO SECTION */}
+      <section className="bg-gradient-to-r from-slate-800 to-slate-700 text-white relative overflow-hidden">
+        <div className="max-w-6xl mx-auto px-6 py-24 text-center">
+          {/* Heading */}
+          <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight min-h-[4rem] md:min-h-[6rem]">
+            {displayText}
+            {!isTypingComplete && (
+              <span className="animate-pulse inline-block ml-1 text-blue-400">
+                |
+              </span>
+            )}
+          </h1>
 
-              <p className="text-gray-300 max-w-2xl mx-auto mb-8">
-                UniSelection helps students explore universities and compare
-                programs, fees, and admission details — all in one centralized
-                platform.
-              </p>
+          {/* Description */}
+          <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+            UniSelection helps students explore universities, compare programs,
+            check fee structures, and view admission details, all in one smart
+            platform.
+          </p>
 
-              {/* Search + Get Started */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <input
-                  type="text"
-                  placeholder="Search university or program..."
-                  className="w-full sm:w-96 px-4 py-3 bg-slate-700 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
+          {/* Search Section */}
+          <div className="relative max-w-xl mx-auto mb-10">
+            {/* 
+        BACKEND NOTE:
+        Later connect this input with:
+        - useState for searchQuery
+        - onChange handler
+        - API call to backend (Node + Express)
+        Example endpoint: GET /api/universities?search=value
+      */}
 
-                <Link
-                  to="/"
-                  className="bg-slate-700 hover:bg-slate-800 text-white px-6 py-3 rounded-lg font-semibold transition"
-                >
-                  Get Started
-                </Link>
-              </div>
-            </div>
-          </section>
+            <input
+              type="text"
+              placeholder="Search university, city, or program..."
+              className="w-full px-5 py-4 pr-32 bg-slate-800 border border-slate-600 rounded-xl text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+            />
 
-          {/* FEATURES SECTION */}
-          <section className="bg-gray-50 py-20">
-            <div className="max-w-6xl mx-auto px-6 grid gap-8 md:grid-cols-3 text-center">
-              <div className="bg-white p-8 rounded-xl shadow hover:shadow-lg transition">
-                <h3 className="text-xl font-semibold mb-3">
-                  🎓 University Comparison
-                </h3>
-                <p className="text-gray-600">
-                  Compare universities and programs based on fees, eligibility,
-                  and admission criteria.
-                </p>
-              </div>
+            {/* 
+        BACKEND NOTE:
+        On click:
+        - Send request to backend
+        - Fetch filtered universities from MongoDB
+        - Navigate to /universities page with results
+      */}
+            <button className="absolute right-2 top-2 bottom-2 px-6 bg-slate-600 hover:bg-slate-700 rounded-lg font-semibold transition">
+              Search
+            </button>
+          </div>
 
-              <div className="bg-white p-8 rounded-xl shadow hover:shadow-lg transition">
-                <h3 className="text-xl font-semibold mb-3">
-                  ⏱ Updated Information
-                </h3>
-                <p className="text-gray-600">
-                  Access regularly updated admission schedules and academic
-                  details.
-                </p>
-              </div>
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-16">
+            {/* 
+        AUTH NOTE:
+        This will connect to:
+        - Login page
+        - Later implement JWT authentication
+        - After login redirect to dashboard
+      */}
+            <Link
+              to="/login"
+              className="bg-white text-slate-900 px-8 py-3 rounded-xl font-semibold hover:bg-gray-200 transition shadow-lg"
+            >
+              Get Started
+            </Link>
 
-              <div className="bg-white p-8 rounded-xl shadow hover:shadow-lg transition">
-                <h3 className="text-xl font-semibold mb-3">🔍 Smart Search</h3>
-                <p className="text-gray-600">
-                  Quickly find universities and programs that match your
-                  academic goals.
-                </p>
-              </div>
-            </div>
-          </section>
+            <Link
+              to="/universities"
+              className="border border-white px-8 py-3 rounded-xl font-semibold hover:bg-white hover:text-slate-900 transition"
+            >
+              Browse Universities
+            </Link>
+          </div>
 
-          {/* POPULAR UNIVERSITIES */}
-          <section className="py-16">
-            <div className="max-w-6xl mx-auto px-6">
-              <h2 className="text-3xl font-bold text-center mb-12">
-                Popular Universities in Khyber Pakhtunkhwa
-              </h2>
-
-              <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 text-center">
-                {[
-                  "University of Peshawar",
-                  "UET Peshawar",
-                  "Agriculture University Peshawar",
-                ].map((uni, index) => (
-                  <div
-                    key={index}
-                    className="border rounded-xl p-6 hover:shadow-lg transition"
-                  >
-                    <h3 className="font-semibold text-lg mb-2">{uni}</h3>
-                    <p className="text-gray-500 text-sm">
-                      View programs, fees & admission details
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
+          {/* Trust Line */}
+          <div className="text-gray-400 text-sm">
+            Trusted by students across Khyber Pakhtunkhwa
+          </div>
         </div>
       </section>
+
       <Universities />
       <About />
       <Contact />
